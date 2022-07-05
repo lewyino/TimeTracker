@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TimeTrackerModel} from "../../models/time-tracker-model";
 import {IssueModel} from "../../models/issue-model";
 import {BreakModel} from "../../models/break-model";
 import {CallModel} from "../../models/call-model";
 import {TimeTrackerType} from "../../models/time-tracker-type";
-import {getModel} from "../../utils/type.utils";
 import {TimeTrackerService} from "../../services/time-tracker.service";
-import {debounceTime, distinct, filter, map, Observable, takeWhile, tap} from "rxjs";
+import {filter, map, Observable} from "rxjs";
 
 @Component({
   selector: 'app-time-tracker',
@@ -15,8 +14,7 @@ import {debounceTime, distinct, filter, map, Observable, takeWhile, tap} from "r
 })
 export class TimeTrackerComponent implements OnInit {
 
-  // timeTracker: TimeTrackerModel | undefined;
-  timeTracker$: Observable<TimeTrackerModel> | undefined;
+  timeTracker$!: Observable<TimeTrackerModel>;
   subscription = true;
 
   constructor(private timeTrackerService: TimeTrackerService) { }
