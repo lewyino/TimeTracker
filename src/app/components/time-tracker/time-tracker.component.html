@@ -1,0 +1,27 @@
+<p>time-tracker works!</p>
+
+<ng-container *ngFor="let time of timeTracker.list">
+  <app-time-tracker-item
+    [uid]="time.uid"
+    (removeItem)="handleRemoveItem($event)"
+  >
+    <app-break
+      *ngIf="getType(time) === 'break'"
+      [breakModel]="time"
+    >
+    </app-break>
+    <app-call
+      *ngIf="getType(time) === 'call'"
+      [callModel]="time"
+    ></app-call>
+    <app-issue
+      *ngIf="getType(time) === 'issue'"
+      [issueModel]="time"
+    ></app-issue>
+  </app-time-tracker-item>
+</ng-container>
+
+przyciski:
+<button (click)="addTimeTrackerItem('issue')">Add issue</button>
+<button (click)="addTimeTrackerItem('call')">Add call</button>
+<button (click)="addTimeTrackerItem('break')">Add break</button>
