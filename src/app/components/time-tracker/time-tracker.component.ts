@@ -6,7 +6,7 @@ import {CallModel} from "../../models/call-model";
 import {TimeTrackerType} from "../../models/time-tracker-type";
 import {getModel} from "../../utils/type.utils";
 import {TimeTrackerService} from "../../services/time-tracker.service";
-import {debounceTime, distinct, filter, map, tap} from "rxjs";
+import {debounceTime, distinct, filter, map, Observable, takeWhile, tap} from "rxjs";
 
 @Component({
   selector: 'app-time-tracker',
@@ -15,21 +15,23 @@ import {debounceTime, distinct, filter, map, tap} from "rxjs";
 })
 export class TimeTrackerComponent implements OnInit {
 
-  timeTracker: TimeTrackerModel | undefined;
+  // timeTracker: TimeTrackerModel | undefined;
+  timeTracker$: Observable<TimeTrackerModel> | undefined;
+  subscription = true;
 
   constructor(private timeTrackerService: TimeTrackerService) { }
 
   ngOnInit(): void {
-    this.timeTrackerService.getTimeTracker()
+    this.timeTracker$ = this.timeTrackerService.getTimeTracker()
       .pipe(
         map((data:TimeTrackerModel) => data),
         filter((data) => !!data),
-      )
-      .subscribe((data: TimeTrackerModel) => {
-        console.log(data);
-        this.timeTracker = data;
-      });
+      );
     this.timeTrackerService.loadData();
+  }
+
+  ngOnDestroy() {
+    this.subscription = false;
   }
 
   getType(type: BreakModel): TimeTrackerType {
