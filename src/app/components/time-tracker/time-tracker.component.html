@@ -1,6 +1,6 @@
 <p>time-tracker works!</p>
 
-<ng-container *ngFor="let time of timeTracker.list">
+<ng-container *ngFor="let time of timeTracker?.list">
   <app-time-tracker-item
     [uid]="time.uid"
     (removeItem)="handleRemoveItem($event)"

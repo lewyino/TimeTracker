@@ -5,6 +5,7 @@ import {BreakModel} from "../../models/break-model";
 import {CallModel} from "../../models/call-model";
 import {TimeTrackerType} from "../../models/time-tracker-type";
 import {getModel} from "../../utils/type.utils";
+import {TimeTrackerService} from "../../services/time-tracker.service";
 
 @Component({
   selector: 'app-time-tracker',
@@ -13,17 +14,12 @@ import {getModel} from "../../utils/type.utils";
 })
 export class TimeTrackerComponent implements OnInit {
 
-  timeTracker: TimeTrackerModel = new TimeTrackerModel();
+  timeTracker: TimeTrackerModel | undefined;
 
-  constructor() { }
+  constructor(private timeTrackerService: TimeTrackerService) { }
 
   ngOnInit(): void {
-    this.timeTracker.list = [
-      new CallModel(),
-      new BreakModel(),
-      new BreakModel(),
-      new IssueModel(),
-    ]
+    this.timeTracker = this.timeTrackerService.getTimeTracker();
   }
 
   getType(type: BreakModel): TimeTrackerType {
@@ -37,12 +33,10 @@ export class TimeTrackerComponent implements OnInit {
   }
 
   addTimeTrackerItem(type: TimeTrackerType) {
-    this.timeTracker.list.push(getModel(type));
+    this.timeTrackerService.addItem(type);
   }
 
   handleRemoveItem(uid: string) {
-    this.timeTracker.list =
-      this.timeTracker.list
-        .filter((item) => item.uid !== uid)
+    this.timeTrackerService.removeItem(uid);
   }
 }
