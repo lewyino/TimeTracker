@@ -3,10 +3,10 @@ import {BreakModel} from "../models/break-model";
 import {CallModel} from "../models/call-model";
 import {IssueModel} from "../models/issue-model";
 
-export function getModel(type: TimeTrackerType): BreakModel {
+export function getModel(type: TimeTrackerType, obj: BreakModel): BreakModel {
   switch (type) {
-    case "issue": return new IssueModel();
-    case "call": return new CallModel();
-    default: return new BreakModel();
+    case "issue": return new IssueModel(obj);
+    case "call": return new CallModel(obj);
+    default: return new BreakModel(obj);
   }
 }

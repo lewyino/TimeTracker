@@ -7,6 +7,7 @@ import { IssueComponent } from './components/issue/issue.component';
 import { CallComponent } from './components/call/call.component';
 import { BreakComponent } from './components/break/break.component';
 import { TimeTrackerItemComponent } from './components/time-tracker-item/time-tracker-item.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TimeTrackerItemComponent } from './components/time-tracker-item/time-tr
     TimeTrackerItemComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
