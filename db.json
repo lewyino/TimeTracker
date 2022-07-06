@@ -1,15 +1,18 @@
 {
   "time-tracker-list": [
     {
-      "uid": "1",
-      "duration": "30m",
-      "type": "break"
+      "duration": "0m",
+      "uid": "ae3faed3-e503-4550-9aed-bdef1a5c9138"
     },
     {
-      "uid": "2",
+      "duration": "0m",
+      "uid": "9e63e261-a85a-4603-86df-49faf2ea64fe",
+      "comment": "33",
+      "id": "3"
+    },
+    {
       "duration": "10m",
-      "comment": "komentarz",
-      "type": "call"
+      "uid": "166025bf-ccee-44c5-8f83-3d2635707856"
     }
   ]
 }

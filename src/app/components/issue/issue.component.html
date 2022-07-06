@@ -1,6 +1,7 @@
 <div>ZADANKO!</div>
 <div [formGroup]="form">
-  id: <input type="text" formControlName="id"><br>
+  id: <input type="text" formControlName="id">
+  <span *ngIf="form.get('id')?.errors">{{form.get('id')?.errors | json}}</span><br>
   duration: <input type="text" formControlName="duration"><br>
   comment: <input type="text" formControlName="comment">
 </div>

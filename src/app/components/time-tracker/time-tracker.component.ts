@@ -7,6 +7,7 @@ import {TimeTrackerType} from "../../models/time-tracker-type";
 import {TimeTrackerService} from "../../services/time-tracker.service";
 import {filter, map, Observable, tap} from "rxjs";
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {getModel} from "../../utils/type.utils";
 
 @Component({
   selector: 'app-time-tracker',
@@ -74,5 +75,8 @@ export class TimeTrackerComponent implements OnInit {
   handleSendForm() {
     this.formSend = true;
     console.log(this.form.value);
+    const timeTracker = new TimeTrackerModel();
+    timeTracker.list = this.form.value.map((item: any) => getModel(item.type, item));
+    this.timeTrackerService.saveTimeTracker(timeTracker);
   }
 }
