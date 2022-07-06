@@ -9,6 +9,7 @@ import {BreakModel} from "../../models/break-model";
 export class TimeTrackerItemComponent implements OnInit {
 
   @Input() uid: string = '';
+  @Input() showUid = false;
   @Output() removeItem: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }

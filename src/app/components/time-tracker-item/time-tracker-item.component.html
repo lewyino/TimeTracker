@@ -1,4 +1,9 @@
-<p>time-tracker-item works!</p>
-<div>uid: {{ uid }}</div>
-<ng-content></ng-content>
-<button (click)="deleteTimeTrackerItem()">usuń</button>
+<div>
+  <div *ngIf="showUid">uid: {{ uid }}</div>
+  <div>
+    <ng-content></ng-content>
+  </div>
+  <div>
+    <button (click)="deleteTimeTrackerItem()">usuń</button>
+  </div>
+</div>

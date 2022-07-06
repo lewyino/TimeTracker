@@ -1,29 +1,43 @@
-<p>time-tracker works!</p>
+<h3>Task list:</h3>
 
 <ng-container *ngIf="timeTracker$ | async as timeTracker">
-  <ng-container *ngFor="let time of timeTracker.list">
+  <ng-container *ngFor="let time of timeTracker.list; let i = index">
     <app-time-tracker-item
       [uid]="time.uid"
-      (removeItem)="handleRemoveItem($event)"
+      (removeItem)="handleRemoveItem($event, i)"
     >
       <app-break
         *ngIf="getType(time) === 'break'"
         [breakModel]="time"
+        [form]="form.controls[i]"
       >
       </app-break>
       <app-call
         *ngIf="getType(time) === 'call'"
         [callModel]="time"
+        [form]="form.controls[i]"
       ></app-call>
       <app-issue
         *ngIf="getType(time) === 'issue'"
         [issueModel]="time"
+        [form]="form.controls[i]"
       ></app-issue>
     </app-time-tracker-item>
   </ng-container>
 </ng-container>
 
-przyciski:
-<button (click)="addTimeTrackerItem('issue')">Add issue</button>
-<button (click)="addTimeTrackerItem('call')">Add call</button>
-<button (click)="addTimeTrackerItem('break')">Add break</button>
+<div>
+  przyciski:
+  <button (click)="addTimeTrackerItem('issue')">Add issue</button>
+  <button (click)="addTimeTrackerItem('call')">Add call</button>
+  <button (click)="addTimeTrackerItem('break')">Add break</button>
+</div>
+
+<div>
+  <button type="button" (click)="handleSendForm()">send!</button>
+</div>
+
+<div *ngIf="formSend">
+  valid: {{form.valid}}<br>
+  {{form.value | json}}
+</div>
