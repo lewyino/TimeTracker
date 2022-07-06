@@ -8,6 +8,15 @@ import { CallComponent } from './components/call/call.component';
 import { BreakComponent } from './components/break/break.component';
 import { TimeTrackerItemComponent } from './components/time-tracker-item/time-tracker-item.component';
 import {HttpClientModule} from "@angular/common/http";
+import {RouterModule, Routes} from "@angular/router";
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
+
+const routes: Routes = [
+  { path: 'time-tracker', component: TimeTrackerComponent },
+  { path: '', component: MainPageComponent},
+  { path: '**', component: NotFoundPageComponent  }
+]
 
 @NgModule({
   declarations: [
@@ -16,11 +25,14 @@ import {HttpClientModule} from "@angular/common/http";
     IssueComponent,
     CallComponent,
     BreakComponent,
-    TimeTrackerItemComponent
+    TimeTrackerItemComponent,
+    NotFoundPageComponent,
+    MainPageComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    RouterModule.forRoot(routes),
   ],
   providers: [],
   bootstrap: [AppComponent]
