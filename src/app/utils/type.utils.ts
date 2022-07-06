@@ -10,3 +10,13 @@ export function getModel(type: TimeTrackerType, obj: BreakModel): BreakModel {
     default: return new BreakModel(obj);
   }
 }
+
+export function getType(type: BreakModel): TimeTrackerType {
+  if (type instanceof CallModel) {
+    return 'call';
+  }
+  if (type instanceof IssueModel) {
+    return 'issue';
+  }
+  return "break";
+}

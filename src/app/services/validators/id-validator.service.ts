@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AbstractControl, AsyncValidator, ValidationErrors} from "@angular/forms";
 import {map, Observable} from "rxjs";
 import {TimeTrackerService} from "../time-tracker.service";

@@ -78,6 +78,10 @@ export class TimeTrackerComponent implements OnInit {
     console.log(this.form.value);
     const timeTracker = new TimeTrackerModel();
     timeTracker.list = this.form.value.map((item: any) => getModel(item.type, item));
-    this.timeTrackerService.saveTimeTracker(timeTracker);
+    this.timeTrackerService.saveTimeTracker(timeTracker)
+      .subscribe((result) => {
+        console.log('save in db;', result);
+        this.timeTrackerService.loadData();
+      });
   }
 }

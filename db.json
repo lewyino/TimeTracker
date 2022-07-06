@@ -1,18 +1,26 @@
 {
   "time-tracker-list": [
     {
-      "duration": "0m",
-      "uid": "ae3faed3-e503-4550-9aed-bdef1a5c9138"
-    },
-    {
-      "duration": "0m",
-      "uid": "9e63e261-a85a-4603-86df-49faf2ea64fe",
-      "comment": "33",
-      "id": "3"
-    },
-    {
       "duration": "10m",
-      "uid": "166025bf-ccee-44c5-8f83-3d2635707856"
+      "uid": "ae3faed3-e503-4550-9aed-bdef1a5c9138",
+      "type": "break"
+    },
+    {
+      "duration": "20m",
+      "uid": "9e63e261-a85a-4603-86df-49faf2ea64fe",
+      "type": "break"
+    },
+    {
+      "duration": "30m",
+      "uid": "166025bf-ccee-44c5-8f83-3d2635707856",
+      "type": "break"
+    },
+    {
+      "duration": "15m",
+      "uid": "166025bf-ccee-44c5-8f83-3d2635707855",
+      "comment": "komentarz",
+      "id": "123",
+      "type": "issue"
     }
   ]
 }

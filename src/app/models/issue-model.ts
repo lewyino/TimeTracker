@@ -7,6 +7,6 @@ export class IssueModel extends BreakModel {
   constructor(opts: Partial<IssueModel> = {}) {
     super(opts);
     this.comment = opts.comment || '';
-    this.comment = opts.id || '';
+    this.id = opts.id || '';
   }
 }
