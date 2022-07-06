@@ -1,0 +1,19 @@
+<p>simple-form works!</p>
+<form #form="ngForm" (ngSubmit)="handleFormSubmit(form)">
+  imię: <input name="firstname" ngModel required minlength="3" #firstname="ngModel" [ngClass]="{'klasa': !firstname.valid}">
+  <span *ngIf="!firstname.valid">{{firstname.errors | json}}</span><br>
+  login: <input name="login" ngModel required minlength="3"><br>
+  email: <input name="email" ngModel required email #email="ngModel">
+  <span *ngIf="!email.valid">{{email.errors | json}}</span><br>
+  miasto: <select name="city" ngModel required>
+    <option value="Warszawa">Warszawa</option>
+    <option value="Poznań">Poznań</option>
+    <option value="Kraków">Kraków</option>
+  </select><br>
+  <button type="submit">wyślij!</button>
+</form>
+
+<div *ngIf="form.submitted">
+  valid: {{ form.valid }}<br>
+  value: {{ form.value | json }}
+</div>

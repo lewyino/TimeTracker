@@ -11,9 +11,12 @@ import {HttpClientModule} from "@angular/common/http";
 import {RouterModule, Routes} from "@angular/router";
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
+import { SimpleFormComponent } from './components/simple-form/simple-form.component';
+import {FormsModule} from "@angular/forms";
 
 const routes: Routes = [
   { path: 'time-tracker', component: TimeTrackerComponent },
+  { path: 'simple-form', component: SimpleFormComponent },
   { path: '', component: MainPageComponent},
   { path: '**', component: NotFoundPageComponent  }
 ]
@@ -27,12 +30,14 @@ const routes: Routes = [
     BreakComponent,
     TimeTrackerItemComponent,
     NotFoundPageComponent,
-    MainPageComponent
+    MainPageComponent,
+    SimpleFormComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
