@@ -3,7 +3,8 @@
 <form [formGroup]="form" (ngSubmit)="handleFormSubmit()">
   imię: <input type="text" formControlName="firstname">
   <span>{{firstnameForm?.errors | json}}</span><br>
-  login: <input type="text" formControlName="login"><br>
+  login: <input type="text" formControlName="login">
+  <span>{{loginForm?.errors | json}}</span><br>
   email: <input type="text" formControlName="email"><br>
   <div formGroupName="address">
     ulica: <input type="text" formControlName="street"><br>
@@ -13,6 +14,8 @@
     <option value="Kraków">Kraków</option>
   </select>
   </div>
+  liczba: <input type="text" formControlName="number">
+  <span>{{numberForm?.errors | json}}</span><br>
   <button type="submit">wyślij!</button>
 </form>
 
