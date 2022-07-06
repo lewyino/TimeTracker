@@ -12,11 +12,13 @@ import {RouterModule, Routes} from "@angular/router";
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { SimpleFormComponent } from './components/simple-form/simple-form.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { ReactiveFormComponent } from './components/reactive-form/reactive-form.component';
 
 const routes: Routes = [
   { path: 'time-tracker', component: TimeTrackerComponent },
   { path: 'simple-form', component: SimpleFormComponent },
+  { path: 'reactive-form', component: ReactiveFormComponent },
   { path: '', component: MainPageComponent},
   { path: '**', component: NotFoundPageComponent  }
 ]
@@ -31,13 +33,15 @@ const routes: Routes = [
     TimeTrackerItemComponent,
     NotFoundPageComponent,
     MainPageComponent,
-    SimpleFormComponent
+    SimpleFormComponent,
+    ReactiveFormComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

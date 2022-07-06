@@ -1,0 +1,22 @@
+<p>reactive-form works!</p>
+
+<form [formGroup]="form" (ngSubmit)="handleFormSubmit()">
+  imię: <input type="text" formControlName="firstname">
+  <span>{{firstnameForm?.errors | json}}</span><br>
+  login: <input type="text" formControlName="login"><br>
+  email: <input type="text" formControlName="email"><br>
+  <div formGroupName="address">
+    ulica: <input type="text" formControlName="street"><br>
+  miasto: <select formControlName="city">
+    <option value="Warszawa">Warszawa</option>
+    <option value="Poznań">Poznań</option>
+    <option value="Kraków">Kraków</option>
+  </select>
+  </div>
+  <button type="submit">wyślij!</button>
+</form>
+
+<div *ngIf="submitted">
+  valid: {{ form.valid}}<br>
+  value: {{form.value | json}}
+</div>
