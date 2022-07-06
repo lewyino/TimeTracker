@@ -21,6 +21,7 @@ export class TimeTrackerComponent implements OnInit {
   form!: FormArray;
   formSend = false;
   formMap = new Map<string, FormGroup>();
+  date = new Date();
 
   constructor(private timeTrackerService: TimeTrackerService,
               private fb: FormBuilder) { }

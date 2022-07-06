@@ -1,5 +1,6 @@
 <h3>Task list:</h3>
-
+<div *appMultiple="1">tutaj!</div>
+<div>data: {{date | date:'dd.MM.y'}}</div>
 <ng-container *ngIf="timeTracker$ | async as timeTracker">
   <ng-container *ngFor="let time of timeTracker.list; let i = index">
     <app-time-tracker-item

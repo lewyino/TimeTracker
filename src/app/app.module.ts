@@ -14,6 +14,8 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { SimpleFormComponent } from './components/simple-form/simple-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ReactiveFormComponent } from './components/reactive-form/reactive-form.component';
+import { HighlightDirective } from './directives/highlight.directive';
+import { MultipleDirective } from './directives/multiple.directive';
 
 const routes: Routes = [
   { path: 'time-tracker', component: TimeTrackerComponent },
@@ -34,7 +36,9 @@ const routes: Routes = [
     NotFoundPageComponent,
     MainPageComponent,
     SimpleFormComponent,
-    ReactiveFormComponent
+    ReactiveFormComponent,
+    HighlightDirective,
+    MultipleDirective
   ],
   imports: [
     BrowserModule,
