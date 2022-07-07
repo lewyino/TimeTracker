@@ -57,7 +57,7 @@ export class TimeTrackerService {
   }
 
   dbEditItem(timeTrackerItem: BreakModel): Observable<boolean> {
-    return this.httpClient.put(this.URL + '/' + timeTrackerItem.uid, this.getModelForSaveInDb(timeTrackerItem))
+    return this.httpClient.put(this.URL + '/' + timeTrackerItem.uid, timeTrackerItem)
       .pipe(
         map(() => true),
         catchError((error) => {
@@ -79,7 +79,7 @@ export class TimeTrackerService {
   }
 
   dbAddItem(timeTrackerItem: BreakModel): Observable<boolean> {
-    return this.httpClient.post(this.URL, this.getModelForSaveInDb(timeTrackerItem))
+    return this.httpClient.post(this.URL, timeTrackerItem)
       .pipe(
         map(() => true),
         catchError((error) => {

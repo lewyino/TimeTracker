@@ -21,6 +21,12 @@
       "comment": "komentarz",
       "id": "123",
       "type": "issue"
+    },
+    {
+      "duration": "15m",
+      "uid": "80f8071c-6e0e-4af1-bb56-ea066be4d89e",
+      "comment": "telefon",
+      "type": "call"
     }
   ]
 }

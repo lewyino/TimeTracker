@@ -7,7 +7,7 @@ import { IssueComponent } from './components/issue/issue.component';
 import { CallComponent } from './components/call/call.component';
 import { BreakComponent } from './components/break/break.component';
 import { TimeTrackerItemComponent } from './components/time-tracker-item/time-tracker-item.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {RouterModule, Routes} from "@angular/router";
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
@@ -16,6 +16,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ReactiveFormComponent } from './components/reactive-form/reactive-form.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { MultipleDirective } from './directives/multiple.directive';
+import {TypeInterceptorService} from "./services/interceptors/type-interceptor.service";
 
 const routes: Routes = [
   { path: 'time-tracker', component: TimeTrackerComponent },
@@ -47,7 +48,9 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TypeInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
