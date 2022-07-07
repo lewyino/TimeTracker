@@ -17,12 +17,15 @@ import { ReactiveFormComponent } from './components/reactive-form/reactive-form.
 import { HighlightDirective } from './directives/highlight.directive';
 import { MultipleDirective } from './directives/multiple.directive';
 import {TypeInterceptorService} from "./services/interceptors/type-interceptor.service";
+import {LoginGuard} from "./services/gurads/login.guard";
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-  { path: 'time-tracker', component: TimeTrackerComponent },
+  { path: 'time-tracker', component: TimeTrackerComponent, canActivate: [LoginGuard] },
   { path: 'simple-form', component: SimpleFormComponent },
   { path: 'reactive-form', component: ReactiveFormComponent },
-  { path: 'stats', loadChildren: () => import('./modules/stats/stats.module').then((m) => m.StatsModule)},
+  { path: 'login', component: LoginComponent },
+  { path: 'stats', canLoad: [LoginGuard], loadChildren: () => import('./modules/stats/stats.module').then((m) => m.StatsModule)},
   { path: '', component: MainPageComponent},
   { path: '**', component: NotFoundPageComponent  }
 ]
@@ -40,7 +43,8 @@ const routes: Routes = [
     SimpleFormComponent,
     ReactiveFormComponent,
     HighlightDirective,
-    MultipleDirective
+    MultipleDirective,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

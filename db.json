@@ -28,5 +28,11 @@
       "comment": "telefon",
       "type": "call"
     }
+  ],
+  "users": [
+    {
+    "login": "lewyino",
+    "password": "12345"
+    }
   ]
 }
