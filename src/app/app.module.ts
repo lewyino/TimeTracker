@@ -17,12 +17,12 @@ import { ReactiveFormComponent } from './components/reactive-form/reactive-form.
 import { HighlightDirective } from './directives/highlight.directive';
 import { MultipleDirective } from './directives/multiple.directive';
 import {TypeInterceptorService} from "./services/interceptors/type-interceptor.service";
-import {StatsModule} from "./modules/stats/stats.module";
 
 const routes: Routes = [
   { path: 'time-tracker', component: TimeTrackerComponent },
   { path: 'simple-form', component: SimpleFormComponent },
   { path: 'reactive-form', component: ReactiveFormComponent },
+  { path: 'stats', loadChildren: () => import('./modules/stats/stats.module').then((m) => m.StatsModule)},
   { path: '', component: MainPageComponent},
   { path: '**', component: NotFoundPageComponent  }
 ]
@@ -45,7 +45,6 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    StatsModule,
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,

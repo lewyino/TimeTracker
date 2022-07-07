@@ -4,7 +4,7 @@ import { ShowComponent } from './components/show/show.component';
 import {RouterModule, Routes} from "@angular/router";
 
 const routes: Routes = [
-  { path: 'stats/show', component: ShowComponent }
+  { path: 'show', component: ShowComponent }
 ];
 
 @NgModule({
@@ -13,7 +13,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes)
   ]
 })
 export class StatsModule { }
