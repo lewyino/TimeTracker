@@ -18,10 +18,15 @@
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@mocks/*": ["./test/mocks/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

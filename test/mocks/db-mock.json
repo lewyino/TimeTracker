@@ -1,0 +1,30 @@
+[
+  {
+    "duration": "10m",
+    "uid": "ae3faed3-e503-4550-9aed-bdef1a5c9138",
+    "type": "break"
+  },
+  {
+    "duration": "20m",
+    "uid": "9e63e261-a85a-4603-86df-49faf2ea64fe",
+    "type": "break"
+  },
+  {
+    "duration": "30m",
+    "uid": "166025bf-ccee-44c5-8f83-3d2635707856",
+    "type": "break"
+  },
+  {
+    "duration": "15m",
+    "uid": "166025bf-ccee-44c5-8f83-3d2635707855",
+    "comment": "komentarz",
+    "id": "123",
+    "type": "issue"
+  },
+  {
+    "duration": "15m",
+    "uid": "80f8071c-6e0e-4af1-bb56-ea066be4d89e",
+    "comment": "telefon",
+    "type": "call"
+  }
+]
