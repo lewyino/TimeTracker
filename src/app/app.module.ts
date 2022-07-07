@@ -17,6 +17,7 @@ import { ReactiveFormComponent } from './components/reactive-form/reactive-form.
 import { HighlightDirective } from './directives/highlight.directive';
 import { MultipleDirective } from './directives/multiple.directive';
 import {TypeInterceptorService} from "./services/interceptors/type-interceptor.service";
+import {StatsModule} from "./modules/stats/stats.module";
 
 const routes: Routes = [
   { path: 'time-tracker', component: TimeTrackerComponent },
@@ -44,6 +45,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
+    StatsModule,
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
