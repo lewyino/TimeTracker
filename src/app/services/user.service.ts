@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router, UrlSegment} from "@angular/router";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class UserService {
 
   private userLogged = false;
 
-  private readonly URL = 'http://localhost:3000/users';
+  private readonly URL = environment.SERVER_API + '/users';
 
   constructor(private httpClient: HttpClient,
               private router: Router) {

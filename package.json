@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "npm-run-all --parallel json-server start:ng",
     "json-server": "json-server --watch db.json --id uid",
+    "json-server:test": "json-server --watch db.json --id uid --static ./dist/time-tracker --port 3333 ",
     "start:ng": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

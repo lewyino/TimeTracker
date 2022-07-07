@@ -6,6 +6,7 @@ import {BehaviorSubject, catchError, combineLatest, map, Observable, of} from "r
 import {BreakModel} from "../models/break-model";
 import {HttpClient} from "@angular/common/http";
 import {IssueModel} from "../models/issue-model";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class TimeTrackerService {
   originalTimeTracker: TimeTrackerModel = new TimeTrackerModel();
   timeTracker$ = new BehaviorSubject<TimeTrackerModel>(this.timeTracker);
 
-  private readonly URL = 'http://localhost:3000/time-tracker-list';
+  private readonly URL = environment.SERVER_API + '/time-tracker-list';
 
   constructor(private httpClient: HttpClient) {}
 
