@@ -15,13 +15,13 @@ export class TimeTrackerService {
 
   timeTracker: TimeTrackerModel = new TimeTrackerModel();
   originalTimeTracker: TimeTrackerModel = new TimeTrackerModel();
-  timeTracker$ = new BehaviorSubject<TimeTrackerModel>(this.timeTracker);
+  timeTracker$ = new BehaviorSubject<TimeTrackerModel | null>(null);
 
   private readonly URL = environment.SERVER_API + '/time-tracker-list';
 
   constructor(private httpClient: HttpClient) {}
 
-  getTimeTracker(): Observable<TimeTrackerModel> {
+  getTimeTracker(): Observable<TimeTrackerModel | null> {
     return this.timeTracker$.asObservable();
   }
 

@@ -27,7 +27,7 @@ describe('TimeTrackerService', () => {
     let data: any = null;
     service.getTimeTracker().subscribe((timeTracker) => {
       if (data !== null && data !== JSON.stringify(timeTracker)) {
-        expect(timeTracker.list.length).toEqual(5);
+        expect(timeTracker?.list.length).toEqual(5);
         done();
       }
       data = JSON.stringify(timeTracker);

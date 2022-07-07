@@ -19,7 +19,7 @@ export class ShowComponent implements OnInit {
   ngOnInit(): void {
     this.timeTrackerService.getTimeTracker()
       .subscribe((timeTracker) => {
-        const stats = timeTracker.list.reduce((prev, item) => {
+        const stats = (timeTracker?.list || []).reduce((prev, item) => {
           if (item instanceof IssueModel) {
             prev.issues.push(item);
             return prev;

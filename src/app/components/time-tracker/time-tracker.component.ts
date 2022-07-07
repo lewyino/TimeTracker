@@ -7,7 +7,7 @@ import {TimeTrackerType} from "../../models/time-tracker-type";
 import {TimeTrackerService} from "../../services/time-tracker.service";
 import {filter, map, Observable, of, tap} from "rxjs";
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
-import {getModel} from "../../utils/type.utils";
+import {getModel, getType} from "../../utils/type.utils";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -34,20 +34,20 @@ export class TimeTrackerComponent implements OnInit {
       const timeTrackerData: TimeTrackerModel = data['timeTrackerData'];
       this.timeTracker$ = of(timeTrackerData)
         .pipe(
-          map((data:TimeTrackerModel) => data),
+          map((data: TimeTrackerModel) => data),
           filter((data) => !!data),
           tap((data) => {
             data.list.forEach((item) => {
               if (!this.formMap.has(item.uid)) {
                 const form = this.fb.group({
                   uid: item.uid,
-                  type: this.getType(item),
+                  type: getType(item),
                 });
                 this.formMap.set(item.uid, form);
                 this.form.push(form);
               }
             });
-            console.log(this.form);
+            // console.log(this.form);
           })
         );
     });
@@ -57,15 +57,7 @@ export class TimeTrackerComponent implements OnInit {
     this.subscription = false;
   }
 
-  getType(type: BreakModel): TimeTrackerType {
-    if (type instanceof CallModel) {
-      return 'call';
-    }
-    if (type instanceof IssueModel) {
-      return 'issue';
-    }
-    return "break";
-  }
+  getType = getType;
 
   addTimeTrackerItem(type: TimeTrackerType) {
     this.timeTrackerService.addItem(type);
