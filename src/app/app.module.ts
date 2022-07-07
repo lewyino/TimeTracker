@@ -19,9 +19,14 @@ import { MultipleDirective } from './directives/multiple.directive';
 import {TypeInterceptorService} from "./services/interceptors/type-interceptor.service";
 import {LoginGuard} from "./services/gurads/login.guard";
 import { LoginComponent } from './components/login/login.component';
+import {TimeTrackerResolver} from "./services/resolvers/time-tracker.resolver";
 
 const routes: Routes = [
-  { path: 'time-tracker', component: TimeTrackerComponent, canActivate: [LoginGuard] },
+  { path: 'time-tracker', component: TimeTrackerComponent, canActivate: [LoginGuard],
+    resolve: {
+      timeTrackerData: TimeTrackerResolver,
+    }
+  },
   { path: 'simple-form', component: SimpleFormComponent },
   { path: 'reactive-form', component: ReactiveFormComponent },
   { path: 'login', component: LoginComponent },

@@ -5,9 +5,10 @@ import {BreakModel} from "../../models/break-model";
 import {CallModel} from "../../models/call-model";
 import {TimeTrackerType} from "../../models/time-tracker-type";
 import {TimeTrackerService} from "../../services/time-tracker.service";
-import {filter, map, Observable, tap} from "rxjs";
+import {filter, map, Observable, of, tap} from "rxjs";
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {getModel} from "../../utils/type.utils";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-time-tracker',
@@ -24,29 +25,32 @@ export class TimeTrackerComponent implements OnInit {
   date = new Date();
 
   constructor(private timeTrackerService: TimeTrackerService,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.form = this.fb.array([]);
-    this.timeTracker$ = this.timeTrackerService.getTimeTracker()
-      .pipe(
-        map((data:TimeTrackerModel) => data),
-        filter((data) => !!data),
-        tap((data) => {
-          data.list.forEach((item) => {
-            if (!this.formMap.has(item.uid)) {
-              const form = this.fb.group({
-                uid: item.uid,
-                type: this.getType(item),
-              });
-              this.formMap.set(item.uid, form);
-              this.form.push(form);
-            }
-          });
-          console.log(this.form);
-        })
-      );
-    this.timeTrackerService.loadData();
+    this.route.data.subscribe((data) => {
+      const timeTrackerData: TimeTrackerModel = data['timeTrackerData'];
+      this.timeTracker$ = of(timeTrackerData)
+        .pipe(
+          map((data:TimeTrackerModel) => data),
+          filter((data) => !!data),
+          tap((data) => {
+            data.list.forEach((item) => {
+              if (!this.formMap.has(item.uid)) {
+                const form = this.fb.group({
+                  uid: item.uid,
+                  type: this.getType(item),
+                });
+                this.formMap.set(item.uid, form);
+                this.form.push(form);
+              }
+            });
+            console.log(this.form);
+          })
+        );
+    });
   }
 
   ngOnDestroy() {
