@@ -5,6 +5,11 @@ export const timeTrackerLoadData = createAction(
   '[TimeTracker] loadData'
 );
 
+export const timeTrackerLoadDataById = createAction(
+  '[TimeTracker] loadData',
+  props<{ id: string }>(),
+);
+
 export const timeTrackerLoadDataSuccess = createAction(
   '[TimeTracker] loadDataSuccess',
   props<TimeTrackerModel>(),

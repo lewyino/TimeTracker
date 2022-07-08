@@ -17,12 +17,16 @@ export class TimeTrackerService {
   originalTimeTracker: TimeTrackerModel = new TimeTrackerModel();
   timeTracker$ = new BehaviorSubject<TimeTrackerModel | null>(null);
 
-  private readonly URL = environment.SERVER_API + '/time-tracker-list';
+  private readonly URL = environment.SERVER_API + '/time-tracker-lista';
 
   constructor(private httpClient: HttpClient) {}
 
   getTimeTracker(): Observable<TimeTrackerModel | null> {
     return this.timeTracker$.asObservable();
+  }
+
+  getData() {
+    return this.httpClient.get<Array<any>>(this.URL);
   }
 
   loadData() {

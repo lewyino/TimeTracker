@@ -11,7 +11,8 @@ import {getModel, getType} from "../../utils/type.utils";
 import {ActivatedRoute} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {selectTimeTracker, selectTimeTrackerLoading} from "../../state/selectors/time-tracker.selectors";
-import {timeTrackerLoadData} from "../../state/actions/time-tracker.actions";
+import {timeTrackerLoadData, timeTrackerLoadDataFailed} from "../../state/actions/time-tracker.actions";
+import {Actions, ofType} from "@ngrx/effects";
 
 @Component({
   selector: 'app-time-tracker',
@@ -28,11 +29,13 @@ export class TimeTrackerComponent implements OnInit {
   date = new Date();
 
   loading$!: Observable<boolean>;
+  error = '';
 
   constructor(private timeTrackerService: TimeTrackerService,
               private fb: FormBuilder,
               private route: ActivatedRoute,
-              private store: Store) { }
+              private store: Store,
+              private actions$: Actions) { }
 
   ngOnInit(): void {
     this.form = this.fb.array([]);
@@ -40,45 +43,30 @@ export class TimeTrackerComponent implements OnInit {
       .pipe(tap((loading) => {
         console.log(loading);
       }))
-    // this.timeTracker$ = this.store.select(selectTimeTracker.projector)
-    //   .pipe(
-    //     map((data: TimeTrackerModel | null) => data),
-    //     filter((data) => !!data),
-    //     tap((data) => {
-    //       data?.list.forEach((item) => {
-    //         if (!this.formMap.has(item.uid)) {
-    //           const form = this.fb.group({
-    //             uid: item.uid,
-    //             type: getType(item),
-    //           });
-    //           this.formMap.set(item.uid, form);
-    //           this.form.push(form);
-    //         }
-    //       });
-    //       // console.log(this.form);
-    //     })
-    //   );
-    this.route.data.subscribe((data) => {
-      const timeTrackerData: TimeTrackerModel = data['timeTrackerData'];
-      this.timeTracker$ = of(timeTrackerData)
-        .pipe(
-          map((data: TimeTrackerModel) => data),
-          filter((data) => !!data),
-          tap((data) => {
-            data.list.forEach((item) => {
-              if (!this.formMap.has(item.uid)) {
-                const form = this.fb.group({
-                  uid: item.uid,
-                  type: getType(item),
-                });
-                this.formMap.set(item.uid, form);
-                this.form.push(form);
-              }
-            });
-            // console.log(this.form);
-          })
-        );
-    });
+    this.timeTracker$ = this.store.select(selectTimeTracker)
+      .pipe(
+        map((data: TimeTrackerModel | null) => data),
+        filter((data) => !!data),
+        tap((data) => {
+          data?.list.forEach((item) => {
+            if (!this.formMap.has(item.uid)) {
+              const form = this.fb.group({
+                uid: item.uid,
+                type: getType(item),
+              });
+              this.formMap.set(item.uid, form);
+              this.form.push(form);
+            }
+          });
+          // console.log(this.form);
+        })
+      );
+    this.actions$.pipe(
+      ofType(timeTrackerLoadDataFailed)
+    )
+      .subscribe(() => {
+        this.error = 'ładowanie danych nie powiodło się';
+      })
   }
 
   ngOnDestroy() {

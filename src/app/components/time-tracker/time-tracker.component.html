@@ -37,6 +37,9 @@
 <div>
   loading: {{ loading$ | async }}
 </div>
+<div *ngIf="error">
+  {{ error }}
+</div>
 <div>
   <button (click)="startLoading()">start loading</button>
 </div>
