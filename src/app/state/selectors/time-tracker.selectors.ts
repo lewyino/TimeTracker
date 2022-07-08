@@ -2,9 +2,9 @@ import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {TimeTrackerAppState} from "../reducers";
 import {TimeTrackerState} from "../reducers/time-tracker.reducers";
 
+export const timeTrackerFeatureName = 'timeTrackerState';
 
-
-export const selectTimeTrackerState = createFeatureSelector<TimeTrackerState>('timeTrackerState')
+export const selectTimeTrackerState = createFeatureSelector<TimeTrackerState>(timeTrackerFeatureName)
 
 export const selectTimeTracker = createSelector(
   selectTimeTrackerState,

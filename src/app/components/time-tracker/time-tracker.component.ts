@@ -11,6 +11,7 @@ import {getModel, getType} from "../../utils/type.utils";
 import {ActivatedRoute} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {selectTimeTracker, selectTimeTrackerLoading} from "../../state/selectors/time-tracker.selectors";
+import {timeTrackerLoadData} from "../../state/actions/time-tracker.actions";
 
 @Component({
   selector: 'app-time-tracker',
@@ -26,6 +27,8 @@ export class TimeTrackerComponent implements OnInit {
   formMap = new Map<string, FormGroup>();
   date = new Date();
 
+  loading$!: Observable<boolean>;
+
   constructor(private timeTrackerService: TimeTrackerService,
               private fb: FormBuilder,
               private route: ActivatedRoute,
@@ -33,10 +36,10 @@ export class TimeTrackerComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.array([]);
-    this.store.select(selectTimeTrackerLoading)
-      .subscribe((loading) => {
+    this.loading$ = this.store.select(selectTimeTrackerLoading)
+      .pipe(tap((loading) => {
         console.log(loading);
-      })
+      }))
     // this.timeTracker$ = this.store.select(selectTimeTracker.projector)
     //   .pipe(
     //     map((data: TimeTrackerModel | null) => data),
@@ -104,5 +107,9 @@ export class TimeTrackerComponent implements OnInit {
         console.log('save in db;', result);
         this.timeTrackerService.loadData();
       });
+  }
+
+  startLoading() {
+    this.store.dispatch(timeTrackerLoadData());
   }
 }

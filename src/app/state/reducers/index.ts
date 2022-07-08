@@ -1,13 +1,15 @@
 import {TimeTrackerModel} from "../../models/time-tracker-model";
 import {timeTrackerReducers, TimeTrackerState} from "./time-tracker.reducers";
 import {Action, ActionReducerMap, createReducer} from "@ngrx/store";
+import {timeTrackerFeatureName} from "../selectors/time-tracker.selectors";
 
 export interface TimeTrackerAppState {
-  timeTrackerState: TimeTrackerState
+  [timeTrackerFeatureName]: TimeTrackerState,
+
 }
 
 export const appState: ActionReducerMap<TimeTrackerAppState> = {
-  timeTrackerState: timeTrackerReducers
+  [timeTrackerFeatureName]: timeTrackerReducers
 };
 
 

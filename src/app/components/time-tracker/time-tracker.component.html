@@ -35,6 +35,13 @@
 </div>
 
 <div>
+  loading: {{ loading$ | async }}
+</div>
+<div>
+  <button (click)="startLoading()">start loading</button>
+</div>
+
+<div>
   <button type="button" (click)="handleSendForm()">send!</button>
 </div>
 

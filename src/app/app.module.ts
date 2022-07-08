@@ -22,6 +22,8 @@ import { LoginComponent } from './components/login/login.component';
 import {TimeTrackerResolver} from "./services/resolvers/time-tracker.resolver";
 import {StoreModule} from "@ngrx/store";
 import {appState} from "./state/reducers";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   { path: 'time-tracker', component: TimeTrackerComponent, canActivate: [LoginGuard],
@@ -60,6 +62,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot(appState),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TypeInterceptorService, multi: true }
