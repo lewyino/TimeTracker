@@ -10,7 +10,7 @@ import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {getModel, getType} from "../../utils/type.utils";
 import {ActivatedRoute} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {selectTimeTracker} from "../../state/selectors/time-tracker.selectors";
+import {selectTimeTracker, selectTimeTrackerLoading} from "../../state/selectors/time-tracker.selectors";
 
 @Component({
   selector: 'app-time-tracker',
@@ -33,24 +33,28 @@ export class TimeTrackerComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.array([]);
-    this.timeTracker$ = this.store.select(selectTimeTracker)
-      .pipe(
-        map((data: TimeTrackerModel) => data),
-        filter((data) => !!data),
-        tap((data) => {
-          data.list.forEach((item) => {
-            if (!this.formMap.has(item.uid)) {
-              const form = this.fb.group({
-                uid: item.uid,
-                type: getType(item),
-              });
-              this.formMap.set(item.uid, form);
-              this.form.push(form);
-            }
-          });
-          // console.log(this.form);
-        })
-      );
+    this.store.select(selectTimeTrackerLoading)
+      .subscribe((loading) => {
+        console.log(loading);
+      })
+    // this.timeTracker$ = this.store.select(selectTimeTracker.projector)
+    //   .pipe(
+    //     map((data: TimeTrackerModel | null) => data),
+    //     filter((data) => !!data),
+    //     tap((data) => {
+    //       data?.list.forEach((item) => {
+    //         if (!this.formMap.has(item.uid)) {
+    //           const form = this.fb.group({
+    //             uid: item.uid,
+    //             type: getType(item),
+    //           });
+    //           this.formMap.set(item.uid, form);
+    //           this.form.push(form);
+    //         }
+    //       });
+    //       // console.log(this.form);
+    //     })
+    //   );
     this.route.data.subscribe((data) => {
       const timeTrackerData: TimeTrackerModel = data['timeTrackerData'];
       this.timeTracker$ = of(timeTrackerData)
