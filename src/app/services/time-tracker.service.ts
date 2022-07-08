@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {TimeTrackerModel} from "../models/time-tracker-model";
 import {TimeTrackerType} from "../models/time-tracker-type";
-import {getModel, getType} from "../utils/type.utils";
+import {getModel} from "../utils/type.utils";
 import {BehaviorSubject, catchError, combineLatest, map, Observable, of} from "rxjs";
 import {BreakModel} from "../models/break-model";
 import {HttpClient} from "@angular/common/http";
@@ -17,7 +17,7 @@ export class TimeTrackerService {
   originalTimeTracker: TimeTrackerModel = new TimeTrackerModel();
   timeTracker$ = new BehaviorSubject<TimeTrackerModel | null>(null);
 
-  private readonly URL = environment.SERVER_API + '/time-tracker-lista';
+  private readonly URL = environment.SERVER_API + '/time-tracker-list';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -111,9 +111,5 @@ export class TimeTrackerService {
       .pipe(
         map((items: any[]) => items.length ? new IssueModel(items[0]) : null)
       )
-  }
-
-  private getModelForSaveInDb(model: BreakModel) {
-    return {...model, type: getType(model)};
   }
 }

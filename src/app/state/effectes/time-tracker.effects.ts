@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {TimeTrackerService} from "../../services/time-tracker.service";
-import {catchError, delay, map, mergeMap, of} from "rxjs";
+import {catchError, map, mergeMap, of} from "rxjs";
 import {
   timeTrackerLoadData,
-  timeTrackerLoadDataById, timeTrackerLoadDataFailed,
+  timeTrackerLoadDataFailed,
   timeTrackerLoadDataSuccess
 } from "../actions/time-tracker.actions";
 import {getModel} from "../../utils/type.utils";
@@ -18,13 +18,12 @@ export class TimeTrackerEffects {
     ofType(timeTrackerLoadData),
     mergeMap(() => this.timeTrackerService.getData()
       .pipe(
-        delay(1000),
         map((payload) => {
           const timeTrackerModel = new TimeTrackerModel();
           timeTrackerModel.list = payload.map((item) => getModel(item.type, item));
           return timeTrackerLoadDataSuccess(timeTrackerModel);
         }),
-        catchError((error) => {
+        catchError(() => {
           return of(timeTrackerLoadDataFailed());
         }),
       ))
