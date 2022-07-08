@@ -20,6 +20,8 @@ import {TypeInterceptorService} from "./services/interceptors/type-interceptor.s
 import {LoginGuard} from "./services/gurads/login.guard";
 import { LoginComponent } from './components/login/login.component';
 import {TimeTrackerResolver} from "./services/resolvers/time-tracker.resolver";
+import {StoreModule} from "@ngrx/store";
+import {appState} from "./state/reducers";
 
 const routes: Routes = [
   { path: 'time-tracker', component: TimeTrackerComponent, canActivate: [LoginGuard],
@@ -57,6 +59,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
+    StoreModule.forRoot(appState),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TypeInterceptorService, multi: true }
